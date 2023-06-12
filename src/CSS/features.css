@@ -6,9 +6,95 @@
 }
 
 .hr-text {
-    background: rgb(156, 136, 221);
     background: linear-gradient(56deg, #560F8F 0%, #5E2FB9 40%, #503FC3 50%, #3458C9 70%, #166BC7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 40px;
+    font-size: 58px;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -10px;
+    margin-bottom: 40px;
+
+}
+
+.card {
+    position: relative;
+    width: calc(33.33% - 20px);
+    height: 400px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    margin: 10px;
+    display: inline-block;
+    background-color: black;
+    box-sizing: border-box;
+}
+
+.card-image {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+}
+
+.card-text {
+    padding: 5px;
+    color: aliceblue;
+    text-align: center;
+}
+
+.animate-left {
+    animation: slide-left 1s ease;
+}
+
+.animate-right {
+    animation: slide-right 1s ease;
+}
+
+.animate-bottom {
+    animation: slide-bottom 1s ease;
+}
+
+@keyframes slide-left {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-right {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-bottom {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 576px) {
+    .card {
+        width: 100%;
+    }
 }

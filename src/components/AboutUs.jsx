@@ -9,6 +9,8 @@ const AboutUsContainer = styled(Box)(({ theme }) => ({
     padding: theme.spacing(2),
     maxWidth: 1000,
     margin: '0 auto',
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4),
 }));
 
 const Content = styled(Box)(({ theme }) => ({

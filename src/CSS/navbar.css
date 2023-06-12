@@ -6,7 +6,6 @@
 }
 
 .gr-text {
-    background: rgb(156, 136, 221);
     background: linear-gradient(56deg, rgba(156, 136, 221, 1) 0%, rgba(243, 103, 162, 1) 96%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

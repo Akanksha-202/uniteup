@@ -5,9 +5,10 @@
     font-family: 'Nunito', sans-serif;
 }
 
-.gr-text {
+.hr-text {
     background: rgb(156, 136, 221);
-    background: linear-gradient(56deg, rgba(156, 136, 221, 1) 0%, rgba(243, 103, 162, 1) 96%);
+    background: linear-gradient(56deg, #560F8F 0%, #5E2FB9 40%, #503FC3 50%, #3458C9 70%, #166BC7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-size: 40px;
 }

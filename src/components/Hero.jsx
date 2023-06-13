@@ -11,8 +11,8 @@ const Hero = () => {
                             <div className="content">
                                 <h1 className="title">UNITEUP</h1>
                                 <p className="description">Lorem ipsum dolor sit amet,<br /> consectetur adipiscing elit.<br /> Fusce lobortis auctor metus <br /> a rutrum.</p>
-                                <button className="btn btn-left">Continue</button>
                             </div>
+                            <button type="button" class="btn btn-dark">CONTINUE</button>
                         </div>
                         <div className="col-3"></div>
                     </div>

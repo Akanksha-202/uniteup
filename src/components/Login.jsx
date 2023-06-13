@@ -18,9 +18,24 @@ function Login() {
     return (
         <MDBContainer fluid className='p-4 background-radial-gradient overflow-hidden' style={{ height: '100vh' }}>
             <MDBRow>
-                <MDBCol md='6' className='position-relative' style={{ width: '100%' }}>
-                    <div className='form-section'>
-                        <MDBCard className='my-5 mx-4 bg-glass'>
+                <MDBCol md='5' className='text-center text-md-start d-flex flex-column justify-content-center'>
+                    <div className='text-section'>
+                        <h1 className="my-5 display-3 fw-bold ls-tight px-3" style={{ color: 'hsl(218, 81%, 95%)' }}>
+                            COLLABORATE<br />
+                            <span style={{ color: 'hsl(218, 81%, 75%)' }}> INNOVATE<br /> SUCCEED</span>
+                        </h1>
+
+                        <p className='px-3' style={{ color: 'hsl(218, 81%, 85%)' }}>
+                            Find your perfect fellowmate with UniteUp: The ultimate matching platform for <br />developers and like-minded companions.
+                            Sign up now and unlock a world of<br /> compatibility and shared experiences.Your ideal fellowmate is just a click away
+
+                        </p>
+                    </div>
+                </MDBCol>
+
+                <MDBCol md='6' className='position-relative' >
+                    <div className='form-section' style={{ width: '100%' }}>
+                        <MDBCard className='my-5 mx-5 bg-glass' style={{ width: '90%' }}>
                             <MDBCardBody className='p-5'>
                                 <h3 className="my-3 display-3 fw-bold ls-tight px-3" style={{ color: '#444876', fontSize: '24px' }}>
                                     USER LOGIN <br />
@@ -44,20 +59,7 @@ function Login() {
                         </MDBCard>
                     </div>
                 </MDBCol>
-                <MDBCol md='5' className='text-center text-md-start d-flex flex-column justify-content-center'>
-                    <div className='text-section'>
-                        <h1 className="my-5 display-3 fw-bold ls-tight px-3" style={{ color: 'hsl(218, 81%, 95%)' }}>
-                            COLLABORATE<br />
-                            <span style={{ color: 'hsl(218, 81%, 75%)' }}> INNOVATE<br /> SUCCEED</span>
-                        </h1>
 
-                        <p className='px-3' style={{ color: 'hsl(218, 81%, 85%)' }}>
-                            Find your perfect fellowmate with UniteUp: The ultimate matching platform for <br />developers and like-minded companions.
-                            Sign up now and unlock a world of<br /> compatibility and shared experiences.Your ideal fellowmate is just a click away
-
-                        </p>
-                    </div>
-                </MDBCol>
             </MDBRow>
         </MDBContainer>
     );

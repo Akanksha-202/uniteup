@@ -1,4 +1,3 @@
-
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import '../CSS/signup.css';
@@ -20,9 +19,9 @@ import {
 
 function SignUp() {
     return (
-        <MDBContainer fluid style={{ ...{ height: '100vh' }, ...{ width: '100%' }, ...{ textAlign: 'center' } }}>
+        <MDBContainer fluid style={{ ...{ height: '100vh' }, ...{ width: '100%' }, ...{ textAlign: 'center' }, ...{ paddingLeft: '15rem' } }}>
 
-            <MDBCard className='text-black m-5' style={{ borderRadius: '25px' }}>
+            <MDBCard className='text-black m-5' style={{ ...{ borderRadius: '25px' }, ...{ width: '80%' } }}>
                 <MDBCardBody>
                     <MDBRow>
                         <MDBCol md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>

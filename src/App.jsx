@@ -1,5 +1,5 @@
 import React from 'react';
-import Routess from './components/Routess';
+import Routess from './pages/Routess';
 
 function App() {
   return (

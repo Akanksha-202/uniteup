@@ -1,68 +1,64 @@
 import React from 'react';
-import {
-    MDBBtn,
-    MDBContainer,
-    MDBRow,
-    MDBCol,
-    MDBCard,
-    MDBCardBody,
-    MDBInput,
-    MDBCheckbox,
-    MDBIcon
-}
-    from 'mdb-react-ui-kit';
-import '../CSS/login.module.css';
 import { Link } from 'react-router-dom';
+import { Container, Grid, Card, CardContent, Typography, TextField, Button } from '@material-ui/core';
 
-function Login() {
+
+const Login = () => {
+
+
     return (
-        <MDBContainer fluid className='p-4 background-radial-gradient overflow-hidden' style={{ height: '100vh' }}>
-            <MDBRow>
-                <MDBCol md='5' className='text-center text-md-start d-flex flex-column justify-content-center'>
-                    <div className='text-section'>
-                        <h1 className="my-5 display-3 fw-bold ls-tight px-3" style={{ color: 'hsl(218, 81%, 95%)' }}>
+        <Container fluid className=" mt-20 p-4" style={{ height: '80vh' }}>
+            <Grid container>
+                <Grid item md={5} className=' text-md-start d-flex flex-column justify-content-center'>
+                    <div>
+                        <Typography variant='h2' className="my-5 display-3 ls-tight px-3" style={{ color: 'hsl(218, 81%, 95%)', fontWeight: 'bolder' }}>
                             COLLABORATE<br />
                             <span style={{ color: 'hsl(218, 81%, 75%)' }}> INNOVATE<br /> SUCCEED</span>
-                        </h1>
+                        </Typography>
 
-                        <p className='px-3' style={{ color: 'hsl(218, 81%, 85%)' }}>
-                            Find your perfect fellowmate with UniteUp: The ultimate matching platform for <br />developers and like-minded companions.
-                            Sign up now and unlock a world of<br /> compatibility and shared experiences.Your ideal fellowmate is just a click away
-
-                        </p>
+                        <br />
+                        <Typography variant="body1" className='px-3' style={{ color: 'hsl(218, 81%, 85%)' }}>
+                            Find your perfect fellowmate with UniteUp: The ultimate matching platform for developers and like-minded companions.
+                            Sign up now and unlock a world of ompatibility and shared experiences.Your ideal fellowmate is just a click away
+                        </Typography>
                     </div>
-                </MDBCol>
+                </Grid>
 
-                <MDBCol md='6' className='position-relative' >
-                    <div className='form-section' style={{ width: '100%' }}>
-                        <MDBCard className='my-5 mx-5 bg-glass' style={{ width: '90%' }}>
-                            <MDBCardBody className='p-5'>
-                                <h3 className="my-3 display-3 fw-bold ls-tight px-3" style={{ color: '#444876', fontSize: '24px' }}>
+                <Grid item md={6} className="position-relative">
+                    <div className='ml-20' style={{ width: '100%' }}>
+                        <Card className="my-5 mx-5 bgGlass" style={{ width: '90%' }}>
+                            <CardContent className='p-5'>
+                                <Typography variant="h3" component="h3" className="my-3 display-3 fw-bold ls-tight px-3" style={{ color: '#444876', fontSize: '24px' }}>
                                     USER LOGIN <br />
-                                </h3>
+                                </Typography>
+
+                                <TextField variant="outlined" margin="normal" fullWidth label="Email" id="form3" type="email" />
+                                <TextField variant="outlined" margin="normal" fullWidth label="Password" id="form4" type="password" />
 
 
-                                <MDBInput wrapperClass='mb-4' label='Email' id='form3' type='email' />
-                                <MDBInput wrapperClass='mb-4' label='Password' id='form4' type='password' />
-
-                                <div className="text-center">
-
-                                    <MDBBtn className='w-100 mb-3' size='md' style={{ maxWidth: '200px', margin: '0 auto' }}>
+                                <div className="text-center mt-5">
+                                    <Button variant="contained" size="large" className='w-100 mb-3 ' style={{ maxWidth: '200px', margin: '0 auto', backgroundColor: '#386bc6', color: 'white' }}>
                                         LOGIN
-                                    </MDBBtn>
+                                    </Button>
 
-                                    <p>don't have an account yet?</p>
-                                    <Link to="/signup" className='.mylink'><b>CREATE ACCOUNT</b></Link>
+                                    <br />
+                                    <br />
 
+                                    <Typography variant="body1">don't have an account yet?</Typography>
+                                    
+                                    <Link to="/signup" style={{
+                                        fontWeight: '700',
+                                        fontSize: '18px',
+                                        color: '#386bc6',
+                                    }}>CREATE ACCOUNT</Link>
                                 </div>
-                            </MDBCardBody>
-                        </MDBCard>
+                            </CardContent>
+                        </Card>
                     </div>
-                </MDBCol>
-
-            </MDBRow>
-        </MDBContainer>
+                </Grid>
+            </Grid>
+        </Container>
     );
-}
+};
 
 export default Login;

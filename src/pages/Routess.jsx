@@ -5,9 +5,10 @@ import {
     Route
 } from 'react-router-dom'
 import Home from './Home';
-import Login from './Login';
-import SignUp from './SignUp';
-import Navbar from './Navbar';
+import Login from '../components/Login';
+import SignUp from './SignMeUp';
+import Project from './Project';
+import Navbar from '../components/Navbar';
 
 function Routess() {
     return (
@@ -18,6 +19,7 @@ function Routess() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
+                    <Route path="/project" element={<Project />} />
                 </Routes>
             </Router>
         </div>

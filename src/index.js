@@ -4,11 +4,11 @@ import './index.css'; // Import Tailwind CSS styles
 import App from './App';
 import { ThemeProvider, createTheme } from '@mui/material/styles'; // Import Material-UI styles
 
-const theme = createTheme();
+
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <React.StrictMode>
     <App />
-  </ThemeProvider>,
+  </React.StrictMode>,
   document.getElementById('root')
 );

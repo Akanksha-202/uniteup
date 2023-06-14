@@ -72,9 +72,7 @@ const AboutUs = () => {
                         <Headline variant="h2">About Us</Headline>
                         <br />
                         <Typography variant="body1">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo inventore officiis temporibus pariatur sit rem cum quam assumenda! Ipsum hic excepturi aliquam dolorum repellat, assumenda porro saepe laudantium quam id.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate sit nisi ratione, fugiat dolorem nostrum totam earum aut repellendus asperiores numquam consectetur velit? Totam odio amet quis libero veniam. Neque!
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus, repudiandae voluptatibus quis nobis eligendi fugiat necessitatibus. Harum aperiam culpa, rem id placeat, molestias inventore mollitia minus, facilis iure quas. Minima!
+                        Our website is a dedicated platform designed to connect freshers and college students interested in tech-related projects. We aim to address the challenges of finding suitable team members and provide a space for collaboration and project discovery. Our goal is to empower individuals, foster innovation, and create opportunities for personal and professional growth. By facilitating project matchmaking, offering resources, and promoting skill development, we strive to create a vibrant community where users can connect, collaborate, and pursue their passion for technology. Join us and unlock your potential in the world of tech projects.
                         </Typography>
                         <ButtonWrapper>
                             <Button>Read More</Button>

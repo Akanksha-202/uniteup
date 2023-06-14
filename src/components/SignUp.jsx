@@ -1,8 +1,48 @@
 import { Button, Container, Grid, Card, CardContent, CardMedia, TextField, FormControlLabel, Checkbox } from '@mui/material';
 import { AccountCircle, Email, Lock, VpnKey, GitHub } from '@mui/icons-material';
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { Link, useNavigate } from 'react-router-dom';
+import { React, useState } from 'react';
+import { auth } from '../config';
 import '../CSS/signup.css';
 
 function SignUp() {
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    github: "",
+    pass: " ",
+
+  });
+
+  const [errorMsg, setErrorMsg] = useState("");
+  const [submitButtonDisabled, setSubmitButtonnDisabled] = useState(false);
+
+  const handleSubmission = () => {
+    if (!values.name || !values.email || !values.github || !values.pass) {
+      setErrorMsg("Please Fill All Fields");
+      return;
+    }
+    setErrorMsg("");
+    setSubmitButtonnDisabled(true);
+  
+    createUserWithEmailAndPassword(auth, values.email, values.pass)
+      .then(async (res) => {
+        setSubmitButtonnDisabled(false);
+        const user = res.user;
+        await updateProfile(user, {
+          displayName: values.name,
+        });
+        console.log(user);
+        navigate("/");
+      })
+      .catch((err) => {
+        setSubmitButtonnDisabled(false);
+        setErrorMsg(err.message);
+      });
+  };
+  
   return (
     <Container
       style={{
@@ -22,28 +62,28 @@ function SignUp() {
 
               <div className="d-flex flex-row align-items-center mb-4 ">
                 <AccountCircle fontSize="small" className="me-3" />
-                <TextField label="Your Name" id="form1" type="text" className="w-100" />
+                <TextField label="Your Name" id="form1" type="text" className="w-100" onChange={(event) =>
+                  setValues((prev) => ({ ...prev, name: event.target.value }))} />
               </div>
 
               <div className="d-flex flex-row align-items-center mb-4">
                 <Email fontSize="small" className="me-3" />
-                <TextField label="Your Email" id="form2" type="email" />
+                <TextField label="Your Email" id="form2" type="email" onChange={(event) =>
+                  setValues((prev) => ({ ...prev, email: event.target.value }))} />
               </div>
 
               <div className="d-flex flex-row align-items-center mb-4">
                 <GitHub fontSize="small" className="me-3" />
-                <TextField label="Your Github Id" id="form2" type="link" />
+                <TextField label="Your Github Id" id="form2" type="link" onChange={(event) =>
+                  setValues((prev) => ({ ...prev, github: event.target.value }))} />
               </div>
 
               <div className="d-flex flex-row align-items-center mb-4">
                 <Lock fontSize="small" className="me-3" />
-                <TextField label="Password" id="form3" type="password" />
+                <TextField label="Password" id="form3" type="password" onChange={(event) =>
+                  setValues((prev) => ({ ...prev, pass: event.target.value }))} />
               </div>
 
-              <div className="d-flex flex-row align-items-center mb-4">
-                <VpnKey fontSize="small" className="me-3" />
-                <TextField label="Repeat your password" id="form4" type="password" />
-              </div>
 
               <div className="mb-4">
                 <FormControlLabel
@@ -52,9 +92,11 @@ function SignUp() {
                 />
               </div>
 
-              <Button className="mb-4" size="large" style={{ backgroundColor: '#386bc6',color: 'white' }}>
+              <Button className="mb-4" size="large" style={{ backgroundColor: '#386bc6', color: 'white' }} onClick={handleSubmission}
+                disabled={submitButtonDisabled}>
                 Register
               </Button>
+              <b className='error'>{errorMsg}</b>
             </Grid>
 
             <Grid item md={6} lg={6} className="order-1 order-lg-2 d-flex align-items-center">

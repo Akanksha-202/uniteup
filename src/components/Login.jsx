@@ -1,9 +1,38 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{ useState} from 'react';
+import { Link , useNavigate  } from 'react-router-dom';
 import { Container, Grid, Card, CardContent, Typography, TextField, Button } from '@material-ui/core';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config';
 
 
 const Login = () => {
+    const navigate = useNavigate();
+    const [values, setValues] = useState({
+        email: "",
+        pass: "",
+    });
+    const [errorMsg, setErrorMsg] = useState("");
+    const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+    const handleSubmission = () => {
+        if (!values.email || !values.pass) {
+            setErrorMsg("Fill all fields");
+            return;
+        }
+        setErrorMsg("");
+
+        setSubmitButtonDisabled(true);
+        signInWithEmailAndPassword(auth, values.email, values.pass)
+            .then(async (res) => {
+                setSubmitButtonDisabled(false);
+
+                navigate("/");
+            })
+            .catch((err) => {
+                setSubmitButtonDisabled(false);
+                setErrorMsg(err.message);
+            });
+    };
 
 
     return (
@@ -32,12 +61,14 @@ const Login = () => {
                                     USER LOGIN <br />
                                 </Typography>
 
-                                <TextField variant="outlined" margin="normal" fullWidth label="Email" id="form3" type="email" />
-                                <TextField variant="outlined" margin="normal" fullWidth label="Password" id="form4" type="password" />
+                                <TextField variant="outlined" margin="normal" fullWidth label="Email" id="form3" type="email" onChange={(event) =>
+                                    setValues((prev) => ({ ...prev, email: event.target.value }))} />
+                                <TextField variant="outlined" margin="normal" fullWidth label="Password" id="form4" type="password" onChange={(event) =>
+                                    setValues((prev) => ({ ...prev, pass: event.target.value }))}/>
 
 
                                 <div className="text-center mt-5">
-                                    <Button variant="contained" size="large" className='w-100 mb-3 ' style={{ maxWidth: '200px', margin: '0 auto', backgroundColor: '#386bc6', color: 'white' }}>
+                                    <Button disabled={submitButtonDisabled} variant="contained" size="large" className='w-100 mb-3 ' style={{ maxWidth: '200px', margin: '0 auto', backgroundColor: '#386bc6', color: 'white' }} onClick={handleSubmission}>
                                         LOGIN
                                     </Button>
 
@@ -51,6 +82,7 @@ const Login = () => {
                                         fontSize: '18px',
                                         color: '#386bc6',
                                     }}>CREATE ACCOUNT</Link>
+                                    <b className='error'>{errorMsg}</b>
                                 </div>
                             </CardContent>
                         </Card>

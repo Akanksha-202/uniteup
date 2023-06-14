@@ -1,9 +1,34 @@
-import styles from "../CSS/projectPage.module.css";
-import picture from '../assets/project.jpg'
-import '../CSS/navbar.css'
-import Icon from '../assets/icon.png'
+import React, { useState, useEffect } from 'react';
+import { Button } from '@material-ui/core';
+import styles from '../CSS/projectPage.module.css';
+import picture from '../assets/project.jpg';
+import '../CSS/navbar.css';
+import Icon from '../assets/icon.png';
+import { db } from '../config';
+import { collection, getDocs } from 'firebase/firestore';
 
 const Project = () => {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    // Fetch projects data from Firestore
+    const fetchProjects = async () => {
+      try {
+        const projectsCollection = collection(db, 'projects');
+        const snapshot = await getDocs(projectsCollection);
+        const projectData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProjects(projectData);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
     <div className={styles.desktop4}>
       <div className="relative">
@@ -14,40 +39,21 @@ const Project = () => {
       </div>
 
       <div className={styles.addProjects}>{`ADD PROJECTS `}</div>
-      <img className={styles.addLibraryMyIcon1} src={Icon} onClick={() => window.location.href='/add'}/>
+      <img className={styles.addLibraryMyIcon1} src={Icon} onClick={() => (window.location.href = '/add')} />
 
       <div className={styles.squareDivContainer}>
-        <div className={styles.squareDiv}>
-          <div className={styles.domainTitle}>
-            <span>Project Domain</span>
+        {projects.map((project) => (
+          <div className={styles.squareDiv} key={project.id}>
+            <div className={styles.domainTitle}>
+              <span>{project.projectDomain}</span>
+            </div>
+            <div className={styles.readMoreHalf} style={{ backgroundColor: '#121421' }}>
+              <span className={styles.projectTitle}>{project.projectName}</span>
+              <button className={styles.readMoreButton}>Read More</button>
+            </div>
           </div>
-          <div className={styles.readMoreHalf} style={{ backgroundColor: "#121421" }}>
-            <span className={styles.projectTitle}>Project Title</span>
-            <button className={styles.readMoreButton}>Read More</button>
-          </div>
-        </div>
-
-        <div className={styles.squareDiv}>
-          <div className={styles.domainTitle}>
-            <span>Project Domain</span>
-          </div>
-          <div className={styles.readMoreHalf} style={{ backgroundColor: "#121421" }}>
-            <span className={styles.projectTitle}>Project Title</span>
-            <button className={styles.readMoreButton}>Read More</button>
-          </div>
-        </div>
-
-        <div className={styles.squareDiv}>
-          <div className={styles.domainTitle}>
-            <span>Project Domain</span>
-          </div>
-          <div className={styles.readMoreHalf} style={{ backgroundColor: "#121421" }}>
-            <span className={styles.projectTitle}>Project Title</span>
-            <button className={styles.readMoreButton}>Read More</button>
-          </div>
-        </div>
+        ))}
       </div>
-
 
       <nav className="bg-gray-900 navi navbar">
         <div className="container mx-auto px-4">
@@ -58,7 +64,6 @@ const Project = () => {
           </div>
         </div>
       </nav>
-
     </div>
   );
 };

@@ -40,6 +40,7 @@
   justify-content: space-between;
   margin: 80px;
   margin-top: 200px;
+  flex-wrap: wrap;
 }
 
 .squareDiv {
@@ -49,6 +50,7 @@
   height: 250px;
   border: 1px solid #000;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
 
 .domainTitle {

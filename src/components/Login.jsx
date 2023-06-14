@@ -1,12 +1,16 @@
-import React,{ useState} from 'react';
-import { Link , useNavigate  } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, Grid, Card, CardContent, Typography, TextField, Button } from '@material-ui/core';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config';
+import { useContext } from 'react';
+import { AuthContext } from './AuthContext';
+
 
 
 const Login = () => {
     const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
     const [values, setValues] = useState({
         email: "",
         pass: "",
@@ -25,8 +29,8 @@ const Login = () => {
         signInWithEmailAndPassword(auth, values.email, values.pass)
             .then(async (res) => {
                 setSubmitButtonDisabled(false);
-
-                navigate("/");
+                login(); // Call the login function from the context
+                navigate('/');
             })
             .catch((err) => {
                 setSubmitButtonDisabled(false);
@@ -64,7 +68,7 @@ const Login = () => {
                                 <TextField variant="outlined" margin="normal" fullWidth label="Email" id="form3" type="email" onChange={(event) =>
                                     setValues((prev) => ({ ...prev, email: event.target.value }))} />
                                 <TextField variant="outlined" margin="normal" fullWidth label="Password" id="form4" type="password" onChange={(event) =>
-                                    setValues((prev) => ({ ...prev, pass: event.target.value }))}/>
+                                    setValues((prev) => ({ ...prev, pass: event.target.value }))} />
 
 
                                 <div className="text-center mt-5">
@@ -76,7 +80,7 @@ const Login = () => {
                                     <br />
 
                                     <Typography variant="body1">don't have an account yet?</Typography>
-                                    
+
                                     <Link to="/signup" style={{
                                         fontWeight: '700',
                                         fontSize: '18px',

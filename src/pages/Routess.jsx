@@ -11,6 +11,8 @@ import Project from './Project';
 import Profile from './Profile';
 import Addproject from './Addproject';
 import Navbar from '../components/Navbar';
+import Features from '../components/Features';
+import AboutUs from '../components/AboutUs';
 
 function Routess() {
     return (
@@ -24,6 +26,8 @@ function Routess() {
                     <Route path="/project" element={<Project />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/add" element={<Addproject />} />
+                    <Route path="/features" element={<Features />} />
+                    <Route path="/about" element={<AboutUs />} />
                 </Routes>
             </Router>
         </div>

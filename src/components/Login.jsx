@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 import {
     MDBBtn,
     MDBContainer,
@@ -12,9 +12,39 @@ import {
 }
     from 'mdb-react-ui-kit';
 import '../CSS/login.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config';
 
 function Login() {
+
+    const navigate = useNavigate();
+    const [values, setValues] = useState({
+        email: "",
+        pass: "",
+    });
+    const [errorMsg, setErrorMsg] = useState("");
+    const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+    const handleSubmission = () => {
+        if (!values.email || !values.pass) {
+            setErrorMsg("Fill all fields");
+            return;
+        }
+        setErrorMsg("");
+
+        setSubmitButtonDisabled(true);
+        signInWithEmailAndPassword(auth, values.email, values.pass)
+            .then(async (res) => {
+                setSubmitButtonDisabled(false);
+
+                navigate("/");
+            })
+            .catch((err) => {
+                setSubmitButtonDisabled(false);
+                setErrorMsg(err.message);
+            });
+    };
     return (
         <MDBContainer fluid className='p-4 background-radial-gradient overflow-hidden' style={{ height: '100vh' }}>
             <MDBRow>
@@ -42,18 +72,24 @@ function Login() {
                                 </h3>
 
 
-                                <MDBInput wrapperClass='mb-4' label='Email' id='form3' type='email' />
-                                <MDBInput wrapperClass='mb-4' label='Password' id='form4' type='password' />
+                                <MDBInput wrapperClass='mb-4' label='Email' id='form3' type='email' onChange={(event) =>
+                                    setValues((prev) => ({ ...prev, email: event.target.value }))
+                                } />
+                                <MDBInput wrapperClass='mb-4' label='Password' id='form4' type='password' onChange={(event) =>
+                                    setValues((prev) => ({ ...prev, pass: event.target.value }))
+                                } />
 
                                 <div className="text-center">
 
-                                    <MDBBtn className='w-100 mb-3' size='md' style={{ maxWidth: '200px', margin: '0 auto' }}>
+                                    <MDBBtn disabled={submitButtonDisabled} className='w-100 mb-3' size='md' style={{ maxWidth: '200px', margin: '0 auto' }}
+                                        onClick={handleSubmission}
+                                    >
                                         LOGIN
                                     </MDBBtn>
 
                                     <p>don't have an account yet?</p>
-                                    <Link to="/signup" className='.mylink'><b>CREATE ACCOUNT</b></Link>
-
+                                    <Link to="/signup" className='.mylink'><b>CREATE ACCOUNT</b></Link><br />
+                                    <b className='error'>{errorMsg}</b>
                                 </div>
                             </MDBCardBody>
                         </MDBCard>

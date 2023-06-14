@@ -2,3 +2,13 @@ body {
     background: rgb(2, 0, 36);
     background: linear-gradient(175deg, rgba(2, 0, 36, 1) 0%, rgba(28, 35, 69, 1) 67%, rgba(255, 153, 204, 1) 100%);
 }
+
+.error {
+    color: chocolate;
+    font-size: 20px;
+    text-align: end;
+}
+
+button:disabled {
+    background-color: gray !important;
+}

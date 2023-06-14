@@ -8,6 +8,7 @@ import Home from './Home';
 import Login from './Login';
 import SignUp from './SignUp';
 import Navbar from './Navbar';
+import Profile from './Profile';
 
 function Routess() {
     return (
@@ -18,6 +19,7 @@ function Routess() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Routes>
             </Router>
         </div>

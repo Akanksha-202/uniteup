@@ -2,18 +2,21 @@ import { Button, Container, Grid, Card, CardContent, CardMedia, TextField, FormC
 import { AccountCircle, Email, Lock, VpnKey, GitHub } from '@mui/icons-material';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
-import { React, useState } from 'react';
+import { React, useState, useContext } from 'react';
 import { auth } from '../config';
+import { AuthContext } from './AuthContext';
 import '../CSS/signup.css';
+
 
 function SignUp() {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+
   const [values, setValues] = useState({
     name: "",
     email: "",
     github: "",
     pass: " ",
-
   });
 
   const [errorMsg, setErrorMsg] = useState("");
@@ -26,7 +29,7 @@ function SignUp() {
     }
     setErrorMsg("");
     setSubmitButtonnDisabled(true);
-  
+
     createUserWithEmailAndPassword(auth, values.email, values.pass)
       .then(async (res) => {
         setSubmitButtonnDisabled(false);
@@ -34,7 +37,7 @@ function SignUp() {
         await updateProfile(user, {
           displayName: values.name,
         });
-        console.log(user);
+        await login(values.email, values.pass);
         navigate("/");
       })
       .catch((err) => {
@@ -42,7 +45,7 @@ function SignUp() {
         setErrorMsg(err.message);
       });
   };
-  
+
   return (
     <Container
       style={{

@@ -1,0 +1,75 @@
+/* addproject.module.css */
+
+.desktop6Child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #141e3f;
+    width: 100%;
+    height: 169px;
+  }
+  
+  .addProjects {
+    position: absolute;
+    top: 39px;
+    left: calc(50% - 265px);
+    font-size: 50px;
+    color: #fff;
+  }
+  
+  
+  .add{
+    position: relative;
+    top: 600px;
+    left: 500px;
+  }
+
+  .cancel{
+    position: relative;
+    top: 550px;
+    left: 600px;
+  }
+  
+  .projectName,
+  .projectDomain,
+  .membersRequired,
+  .projectDescription {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    font-size: 24px;
+  }
+  
+  .projectName {
+    width: 300px;
+  }
+  
+  .projectDomain {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+  }
+  
+  .membersRequired {
+    top: 60%;
+  }
+  
+  .projectDescription {
+    top: 70%;
+    width: 400px;
+    height: 200px;
+  }
+  
+  .desktop6 {
+    position: relative;
+    background-color: #f6d0f6;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    text-align: left;
+    font-size: 32px;
+    color: #000;
+    font-family: Inter;
+  }
+  

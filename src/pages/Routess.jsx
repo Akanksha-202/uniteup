@@ -9,6 +9,7 @@ import Login from '../components/Login';
 import SignUp from './SignMeUp';
 import Project from './Project';
 import Profile from './Profile';
+import Addproject from './Addproject';
 import Navbar from '../components/Navbar';
 
 function Routess() {
@@ -22,6 +23,7 @@ function Routess() {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/project" element={<Project />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/add" element={<Addproject />} />
                 </Routes>
             </Router>
         </div>

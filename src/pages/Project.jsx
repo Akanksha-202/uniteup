@@ -14,7 +14,7 @@ const Project = () => {
       </div>
 
       <div className={styles.addProjects}>{`ADD PROJECTS `}</div>
-      <img className={styles.addLibraryMyIcon1} src={Icon} />
+      <img className={styles.addLibraryMyIcon1} src={Icon} onClick={() => window.location.href='/add'}/>
 
       <div className={styles.squareDivContainer}>
         <div className={styles.squareDiv}>

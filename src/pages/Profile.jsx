@@ -90,21 +90,6 @@ const Profile = () => {
             ))}
 
             <img className={styles.maskGroupIcon1} alt="" src="/mask-group5@2x.png" />
-
-            <Typography variant="subtitle1" className={styles.exploreMore}>JOINED PROJECTS</Typography>
-            <div className={styles.squareDivContainer2}>
-                <div className={styles.squareDiv}>
-                    <div className={styles.domainTitle}>
-                        <span>projectDomain</span>
-                    </div>
-                    <div className={styles.readMoreHalf} style={{ backgroundColor: '#121421' }}>
-                        <span className={styles.projectTitle}>projectName</span>
-                        <Link to={`/`} className={styles.readMoreButton}>
-                            Read More
-                        </Link>
-                    </div>
-                </div>
-            </div>
         </>
     );
 };

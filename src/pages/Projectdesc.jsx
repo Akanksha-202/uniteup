@@ -10,6 +10,7 @@ const Projectdesc = () => {
     const { projectId } = useParams(); // Get the project ID from the URL
     const [projectData, setProjectData] = useState(null);
     const [canJoin, setCanJoin] = useState(false); // Track whether the user can join
+    const [joinedMembers, setJoinedMembers] = useState([]); // Store joined members' emails
 
     useEffect(() => {
         const fetchProjectData = async () => {
@@ -28,6 +29,29 @@ const Projectdesc = () => {
 
         fetchProjectData();
     }, [projectId]);
+
+    useEffect(() => {
+        const fetchJoinedMembers = async () => {
+            try {
+                const usersCollection = collection(db, 'users');
+                const joinedMembersSnapshot = await getDocs(query(usersCollection, where('email', 'in', projectData.joinneeEmail)));
+
+                const joinedMembersData = [];
+                joinedMembersSnapshot.forEach((doc) => {
+                    const userData = doc.data();
+                    joinedMembersData.push(userData.email);
+                });
+
+                setJoinedMembers(joinedMembersData);
+            } catch (error) {
+                console.error('Error fetching joined members:', error);
+            }
+        };
+
+        if (projectData && projectData.joinneeEmail) {
+            fetchJoinedMembers();
+        }
+    }, [projectData]);
 
     const handleJoin = async () => {
         try {
@@ -69,7 +93,13 @@ const Projectdesc = () => {
                     </div>
                     <Typography variant='h3' className={styles.joinedMember}>JOINED MEMBERS</Typography>
                     <div className={styles.NameWrapper}>
-                        <Typography variant="body1" className={styles.Name}>{`Name`}</Typography>
+                        <div className={styles.NamesContainer}>
+                            {joinedMembers.map((email, index) => (
+                                <Typography key={index} variant="body1">
+                                    {email}
+                                </Typography>
+                            ))}
+                        </div>
                     </div>
                     {canJoin && ( // Display Join button only if canJoin is true
                         <Button variant="contained" color="primary" className={styles.joinWrapper} onClick={handleJoin}>

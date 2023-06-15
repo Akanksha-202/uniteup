@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
+import { useEffect } from 'react';
 
 
 
@@ -12,30 +13,43 @@ const Login = () => {
     const navigate = useNavigate();
     const { login } = useContext(AuthContext);
     const [values, setValues] = useState({
-        email: "",
-        pass: "",
+        email: '',
+        pass: '',
     });
-    const [errorMsg, setErrorMsg] = useState("");
+    const [errorMsg, setErrorMsg] = useState('');
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+    useEffect(() => {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (isLoggedIn === 'true') {
+            login();
+        }
+    }, [login]);
 
     const handleSubmission = () => {
         if (!values.email || !values.pass) {
-            setErrorMsg("Fill all fields");
+            setErrorMsg('Fill all fields');
             return;
         }
-        setErrorMsg("");
+        setErrorMsg('');
 
         setSubmitButtonDisabled(true);
         signInWithEmailAndPassword(auth, values.email, values.pass)
             .then(async (res) => {
                 setSubmitButtonDisabled(false);
                 login(); // Call the login function from the context
+                localStorage.setItem('isLoggedIn', 'true'); // Store login status
                 navigate('/');
             })
             .catch((err) => {
                 setSubmitButtonDisabled(false);
                 setErrorMsg(err.message);
             });
+    };
+    const handleLogout = () => {
+        localStorage.setItem('isLoggedIn', 'false'); // Update login status to false
+        // Perform any other logout operations if needed
+
     };
 
 
@@ -78,6 +92,25 @@ const Login = () => {
 
                                     <br />
                                     <br />
+
+
+                                    {localStorage.getItem('isLoggedIn') === 'true' && (
+                                        <Button
+                                            variant="contained"
+                                            size="large"
+                                            className="w-100 mb-3"
+                                            style={{
+                                                maxWidth: '200px',
+                                                margin: '0 auto',
+                                                backgroundColor: '#386bc6',
+                                                color: 'white',
+                                            }}
+                                            onClick={handleLogout}
+                                        >
+                                            LOGOUT
+                                        </Button>
+                                    )}
+
 
                                     <Typography variant="body1">don't have an account yet?</Typography>
 

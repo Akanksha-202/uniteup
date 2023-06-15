@@ -10,6 +10,7 @@ import SignUp from './SignMeUp';
 import Project from './Project';
 import Profile from './Profile';
 import Addproject from './Addproject';
+import Projectdesc from './Projectdesc';
 import Navbar from '../components/Navbar';
 
 function Routess() {
@@ -24,6 +25,7 @@ function Routess() {
                     <Route path="/project" element={<Project />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/add" element={<Addproject />} />
+                    <Route path="/desc/:projectId" element={<Projectdesc />} /> 
                 </Routes>
             </Router>
         </div>

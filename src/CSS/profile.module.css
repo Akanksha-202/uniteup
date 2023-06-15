@@ -1,20 +1,10 @@
-.desktop5Child,
-.desktop5Item {
+.desktop5Child {
     position: absolute;
     top: 0;
     left: 0;
     background-color: #141e3f;
     width: 100%;
     height: 22rem;
-}
-
-.desktop5Item {
-    top: 3.5%;
-    left: 16%;
-    border-radius: 50%;
-    background-color: #f7d1f7;
-    width: 15rem;
-    height: 15rem;
 }
 
 .maskGroupIcon {
@@ -48,51 +38,7 @@
     height: 118px;
 }
 
-.desktop5Inner {
-    position: absolute;
-    top: 86px;
-    left: 1095px;
-    background-color: #413864;
-    width: 223px;
-    height: 66px;
-}
 
-.desktop5Child1,
-.desktop5Child2,
-.lastRectangle,
-.rectangleDiv {
-    position: absolute;
-    top: 561px;
-    left: 44px;
-    background-color: #413864;
-    width: 300px;
-    height: 96px;
-}
-
-.desktop5Child1,
-.desktop5Child2,
-.lastRectangle {
-    top: 740px;
-    /* Adjusted position */
-    width: 430px;
-}
-
-.desktop5Child2,
-.lastRectangle {
-    top: 980px;
-    /* Adjusted position */
-    left: 38px;
-    width: 550px;
-}
-
-.lastRectangle {
-    top: 1400px;
-    /* Adjusted position */
-    left: 0;
-    background-color: #141e3f;
-    width: 1440px;
-    height: 278px;
-}
 
 
 .skills {
@@ -143,90 +89,9 @@
     width: 953px;
 }
 
-.frameChild {
-    position: relative;
-    border-radius: 21px;
-    background-color: #121421;
-    width: 300px;
-    height: 300px;
-    margin-right: 120px;
-}
 
-.rectangleGroup,
-.rectangleParent {
-    position: absolute;
-    top: 900px;
-    /* Adjusted position */
-    left: calc(50% - 676px);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 31px;
-}
 
-.rectangleGroup {
-    top: 1340px;
-    /* Adjusted position */
-}
 
-.frameChild4 {
-    position: relative;
-    border-radius: 21px;
-    background-color: #141e3f;
-    width: 300px;
-    height: 100px;
-    margin-right: 120px;
-}
-
-.projectDomain {
-    position: relative;
-    font-size: 26px;
-    align-items: center;
-    display: inline-block;
-    width: 300px;
-    height: 71px;
-    color: #665b6b;
-}
-
-.projectDomainGroup,
-.projectDomainParent,
-.projectTitleGroup,
-.projectTitleParent {
-    position: absolute;
-    top: 930px;
-    /* Adjusted position */
-    left: calc(50% - 661px);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-start;
-    gap: 150px;
-    font-size: 26px;
-    font-family: Nunito;
-}
-
-.projectDomainGroup,
-.projectTitleGroup,
-.projectTitleParent {
-    top: 1370px;
-    /* Adjusted position */
-}
-
-.projectTitleGroup,
-.projectTitleParent {
-    top: 1050px;
-    /* Adjusted position */
-    left: calc(50% - 600px);
-    align-items: flex-start;
-    gap: 137px;
-}
-
-.projectTitleGroup {
-    top: 1500px;
-    gap: 140px;
-    /* Adjusted position */
-}
 
 .projectContent {
     position: absolute;
@@ -238,109 +103,11 @@
     font-size: 1rem;
 }
 
-.frameChild10 {
-    position: relative;
-    border-radius: 15px;
-    background-color: #967ed2;
-    width: 209px;
-    height: 62px;
-}
-
-.rectangleParent1,
-.rectangleParent2 {
+.exploreMore{
     position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 252px;
-}
-
-.rectangleParent1 {
-    top: 1160px;
-    /* Adjusted position */
-    left: 135px;
-}
-
-.rectangleParent2 {
-    top: 1650px;
-    /* Adjusted position */
-    left: calc(50% - 646px);
-}
-
-.readMore {
-    position: relative;
-    font-weight: 400;
-    display: inline-block;
-    width: 162px;
-    height: 37px;
-    flex-shrink: 0;
-}
-
-.readMoreGroup,
-.readMoreParent {
-    position: absolute;
-    top: 1160px;
-    /* Adjusted position */
-    left: calc(50% - 600px);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-start;
-    gap: 284px;
-    font-size: 24px;
-    color: #1c1c1c;
-    font-family: Nunito;
-}
-
-.readMoreGroup {
-    top: 1650px;
-    /* Adjusted position */
-}
-
-.maskGroupIcon1 {
-    position: absolute;
-    top: 2337px;
-    /* Adjusted position */
-    left: 601px;
-    width: 224px;
-    height: 60px;
-    object-fit: cover;
-}
-
-.maskGroupChild {
-    position: absolute;
-    top: -33px;
-    left: -22px;
-    background-color: #fff;
-    width: 437px;
-    height: 113px;
-}
-
-.maskGroup {
-    position: absolute;
-    top: 365px;
-    /* Adjusted position */
-    left: 970px;
-    width: 392px;
-    height: 80px;
-}
-
-.exploreMore,
-.exploreMore1 {
-    position: absolute;
-    top: 1237px;
-    /* Adjusted position */
-    left: calc(50% - 470px);
-    font-size: 36px;
-    font-weight: 500;
-    font-family: Nunito;
-    color: #000;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    width: 50%;
-    height: 78px;
+    top: 1100px;
+    left: 69px;
+    font-size: 1.5rem;
 }
 
 
@@ -350,10 +117,76 @@
     background-color: #f6d0f6;
     width: 100%;
     height: 2400px;
-    /* Adjusted height */
     overflow: hidden;
     text-align: center;
     font-size: 50px;
     color: #fff;
     font-family: Montserrat;
 }
+
+
+.squareDivContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 80px;
+    margin-top: 200px;
+    flex-wrap: wrap;
+    position: absolute;
+    top:550px;
+  }
+.squareDivContainer2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 80px;
+    
+    flex-wrap: wrap;
+    position: absolute;
+    top:1100px;
+  }
+  
+  .squareDiv {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 250px;
+    border: 1px solid #000;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .domainTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background-color: #141e3f;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .readMoreHalf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background-color: #121421;
+    color: #fff;
+  }
+  
+  .readMoreButton {
+    background-color: #967ED2;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .projectTitle {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }

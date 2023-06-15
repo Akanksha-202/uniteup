@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import styles from '../CSS/addproject.module.css';
-import { db } from '../config';
+import { db,auth } from '../config';
 import { collection, addDoc } from 'firebase/firestore';
 
 const Addproject = () => {
@@ -12,26 +12,30 @@ const Addproject = () => {
 
   const handleFormSubmit = async () => {
     try {
+      // Get the currently logged-in user
+      const currentUser = auth.currentUser;
+  
       // Create a reference to the Firebase Firestore collection
       const projectsCollection = collection(db, 'projects');
-
+  
       // Create a new project document
       const newProject = {
         projectName,
         projectDomain,
         membersRequired,
         projectDescription,
+        userEmail: currentUser.email, // Store the logged-in user's email
       };
-
+  
       // Store the new project document in the Firestore collection
       await addDoc(projectsCollection, newProject);
-
+  
       // Reset the form fields after successful submission
       setProjectName('');
       setProjectDomain('');
       setMembersRequired('');
       setProjectDescription('');
-
+  
       // Redirect to the desired page
       window.location.href = '/project';
     } catch (error) {
@@ -39,6 +43,7 @@ const Addproject = () => {
       console.error('Error storing project:', error);
     }
   };
+  
 
   return (
     <div className={styles.desktop6}>

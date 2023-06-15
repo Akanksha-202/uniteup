@@ -20,7 +20,9 @@ const Navbar = () => {
             </div>
             <div className="flex">
               <Link to="/" className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">HOME</Link>
-              <Link to="/project" className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">PROJECTS</Link>
+              {isAuthenticated && (
+                <Link to="/project" className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">PROJECTS</Link>
+              )}
               <button className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">ABOUT US</button>
               <button className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">FEATURES</button>
               {isAuthenticated ? (
@@ -39,4 +41,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar;  

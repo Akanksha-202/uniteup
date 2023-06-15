@@ -1,12 +1,16 @@
 import { Button, Container, Grid, Card, CardContent, CardMedia, TextField, FormControlLabel, Checkbox } from '@mui/material';
-import { AccountCircle, Email, Lock, VpnKey, GitHub } from '@mui/icons-material';
+import { AccountCircle, Email, Lock } from '@mui/icons-material';
+import InfoIcon from '@mui/icons-material/Info';
+import SpaIcon from '@mui/icons-material/Spa';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
 import { React, useState, useContext } from 'react';
 import { auth } from '../config';
 import { AuthContext } from './AuthContext';
 import '../CSS/signup.css';
-
+import { db } from '../config';
+import { collection, addDoc } from 'firebase/firestore';
 
 function SignUp() {
   const navigate = useNavigate();
@@ -15,35 +19,50 @@ function SignUp() {
   const [values, setValues] = useState({
     name: "",
     email: "",
-    github: "",
-    pass: " ",
+    bio: "",
+    exp: "",
+    link: "",
+    pass: "",
   });
 
   const [errorMsg, setErrorMsg] = useState("");
-  const [submitButtonDisabled, setSubmitButtonnDisabled] = useState(false);
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
-  const handleSubmission = () => {
-    if (!values.name || !values.email || !values.github || !values.pass) {
+  const usersCollectionRef = collection(db, "users");
+
+  const handleSubmission = async () => {
+    if (!values.name || !values.email || !values.link || !values.pass) {
       setErrorMsg("Please Fill All Fields");
       return;
     }
     setErrorMsg("");
-    setSubmitButtonnDisabled(true);
+    setSubmitButtonDisabled(true);
 
-    createUserWithEmailAndPassword(auth, values.email, values.pass)
-      .then(async (res) => {
-        setSubmitButtonnDisabled(false);
-        const user = res.user;
-        await updateProfile(user, {
-          displayName: values.name,
-        });
-        await login(values.email, values.pass);
-        navigate("/");
-      })
-      .catch((err) => {
-        setSubmitButtonnDisabled(false);
-        setErrorMsg(err.message);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.pass);
+      const user = userCredential.user;
+
+      // Create the user document in Firestore
+      await addDoc(usersCollectionRef, {
+        name: values.name,
+        email: values.email,
+        bio: values.bio,
+        exp: values.exp,
+        link: values.link,
+        uid: user.uid,
       });
+
+      // Update the user profile
+      await updateProfile(user, {
+        displayName: values.name,
+      });
+
+      await login(values.email, values.pass);
+      navigate("/");
+    } catch (err) {
+      setSubmitButtonDisabled(false);
+      setErrorMsg(err.message);
+    }
   };
 
   return (
@@ -64,26 +83,38 @@ function SignUp() {
               <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
               <div className="d-flex flex-row align-items-center mb-4 ">
-                <AccountCircle fontSize="small" className="me-3" />
+                <AccountCircle fontSize="small" className="me-3 mt-4" />
                 <TextField label="Your Name" id="form1" type="text" className="w-100" onChange={(event) =>
                   setValues((prev) => ({ ...prev, name: event.target.value }))} />
               </div>
 
               <div className="d-flex flex-row align-items-center mb-4">
-                <Email fontSize="small" className="me-3" />
+                <Email fontSize="small" className="me-3 mt-4" />
                 <TextField label="Your Email" id="form2" type="email" onChange={(event) =>
                   setValues((prev) => ({ ...prev, email: event.target.value }))} />
               </div>
 
               <div className="d-flex flex-row align-items-center mb-4">
-                <GitHub fontSize="small" className="me-3" />
-                <TextField label="Your Github Id" id="form2" type="link" onChange={(event) =>
-                  setValues((prev) => ({ ...prev, github: event.target.value }))} />
+                <InfoIcon fontSize="small" className="me-3 mt-4" />
+                <TextField label="Bio" id="form2" type="text" onChange={(event) =>
+                  setValues((prev) => ({ ...prev, bio: event.target.value }))} />
               </div>
 
               <div className="d-flex flex-row align-items-center mb-4">
-                <Lock fontSize="small" className="me-3" />
-                <TextField label="Password" id="form3" type="password" onChange={(event) =>
+                <SpaIcon fontSize="small" className="me-3 mt-4" />
+                <TextField label="Experience" id="form3" type="text" onChange={(event) =>
+                  setValues((prev) => ({ ...prev, exp: event.target.value }))} />
+              </div>
+
+              <div className="d-flex flex-row align-items-center mb-4">
+                <LinkedInIcon fontSize="small" className="me-3 mt-4" />
+                <TextField label="LinkedIn" id="form3" type="link" onChange={(event) =>
+                  setValues((prev) => ({ ...prev, link: event.target.value }))} />
+              </div>
+
+              <div className="d-flex flex-row align-items-center mb-4">
+                <Lock fontSize="small" className="me-3 mt-4" />
+                <TextField label="Set Password" id="form3" type="password" onChange={(event) =>
                   setValues((prev) => ({ ...prev, pass: event.target.value }))} />
               </div>
 

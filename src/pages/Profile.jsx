@@ -1,97 +1,110 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Typography, IconButton } from '@material-ui/core';
 import styles from '../CSS/profile.module.css';
+import { Link } from 'react-router-dom';
 import Image from "../assets/user.png"
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import MailIcon from '@mui/icons-material/Mail';
+import { getDocs, collection, query, where } from 'firebase/firestore';
+import { db } from '../config';
+import { auth } from '../config';
 
 const Profile = () => {
+    const [user, setUser] = useState(null);
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const usersCollection = collection(db, 'users');
+                const q = query(usersCollection, where('email', '==', auth.currentUser.email)); // Filter users by email
+                const querySnapshot = await getDocs(q);
+                const userData = querySnapshot.docs.map((doc) => doc.data());
+                setUser(userData[0]);
+
+                const projectsCollection = collection(db, 'projects');
+                const projectsQuery = query(projectsCollection, where('userEmail', '==', auth.currentUser.email)); // Filter projects by user email
+                const projectsSnapshot = await getDocs(projectsQuery);
+                const userProjects = projectsSnapshot.docs.map((doc) => doc.data());
+                setProjects(userProjects);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                fetchUserData();
+            }
+        });
+
+        return () => unsubscribe(); // Cleanup the listener when the component unmounts
+    }, []);
+
+    if (!user) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <>
             <div className={styles.desktop5}>
                 <div className={styles.desktop5Child} />
-                <div className={styles.desktop5Item} />
                 <img className={styles.maskGroupIcon} alt="" src={Image} />
-                <b className={styles.sanyaGupta}>{`SANYA GUPTA `}</b>
+                <Typography variant="h2" className={styles.sanyaGupta}>{user.name}</Typography>
                 <div className={styles.bioLoremIpsumContainer}><br />
-                    <p className={styles.bio}>{`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the `}</p>
+                    <Typography variant="h4" className={styles.bio}>Experience</Typography>
+                    <Typography variant="body1" className={styles.bio}>{user.exp}</Typography>
                 </div>
-                <p className={styles.bio}>{`Experience `}</p>
-                <p
-                    className={styles.bio}
-                >{`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the leader`}</p>
+                <div style={{ position: 'absolute', right: '50px' }}>
+                    <IconButton color="primary" aria-label="LinkedIn" href={user.link} target="_blank" rel="noopener noreferrer">
+                        <LinkedInIcon />
+                    </IconButton>
+                    <IconButton color="primary" aria-label="Gmail" href={`mailto:${user.email}`}>
+                        <MailIcon />
+                    </IconButton>
+                </div>
             </div>
             <div>
-                <b className={styles.skills}>{`SKILLS `}</b>
-                <p className={styles.skillsContent}><br /><br />{`Hey I am a UI/UX designer working really hard for the hackathon named HACKUNICORN and I really hope that our mentors like it and we pass the vibe check!.  I specialize in creating intuitive and engaging user interfaces with a focus on delivering exceptional user experiences.
-          With a strong background in UI/UX design principles and extensive experience in front-end development using React,
-          I bring creativity, technical expertise, and a passion for delivering high-quality solutions to every project I work on.`}</p>
-                <b className={styles.myProjects}>MY PROJECTS</b>
-                <p className={styles.projectContent}><br /><br />{`Welcome to the Projects section! Here you will find a compilation of both the projects I initiated and the ones I joined. Each endeavor represents a unique opportunity for me to contribute my skills and knowledge, while also collaborating with talented individuals. As you explore this section, you'll discover an assortment of innovative and impactful initiatives, ranging from personal undertakings to group efforts. These projects showcase my versatility, dedication, and ability to adapt to various team dynamics. I invite you to delve into the details of each project and witness the passion and commitment I bring to the table..`}</p>
+                <Typography variant="subtitle1" className={styles.skills}>Bio</Typography>
+                <Typography variant="body1" className={styles.skillsContent}><br /><br />{user.bio}</Typography>
+                <Typography variant="subtitle1" className={styles.myProjects}>MY PROJECTS</Typography>
             </div>
 
-            <div className={styles.rectangleParent}>
-                <div className={styles.frameChild} />
-                <div className={styles.frameChild} />
-                <div className={styles.frameChild} />
-            </div>
-            <div className={styles.rectangleGroup}>
-                <div className={styles.frameChild} />
-                <div className={styles.frameChild} />
-                <div className={styles.frameChild} />
-            </div>
-            <div className={styles.rectangleParent}>
-                <div className={styles.frameChild4} />
-                <div className={styles.frameChild4} />
-                <div className={styles.frameChild4} />
-            </div>
-            <div className={styles.rectangleGroup}>
-                <div className={styles.frameChild4} />
-                <div className={styles.frameChild4} />
-                <div className={styles.frameChild4} />
-            </div>
-            <div className={styles.projectDomainParent}>
-                <div className={styles.projectDomain}>Project Domain</div>
-                <div className={styles.projectDomain}>Project Domain</div>
-                <div className={styles.projectDomain}>Project Domain</div>
-            </div>
-            <div className={styles.projectDomainGroup}>
-                <div className={styles.projectDomain}>Project Domain</div>
-                <div className={styles.projectDomain}>Project Domain</div>
-                <div className={styles.projectDomain}>Project Domain</div>
-            </div>
-            <div className={styles.projectTitleParent}>
-                <div className={styles.projectDomain}>Project Title</div>
-                <div className={styles.projectDomain}>Project Title</div>
-                <div className={styles.projectDomain}>Project Title</div>
-            </div>
-            <div className={styles.projectTitleGroup}>
-                <div className={styles.projectDomain}>Project Title</div>
-                <div className={styles.projectDomain}>Project Title</div>
-                <div className={styles.projectDomain}>Project Title</div>
-            </div>
-            <div className={styles.rectangleParent1}>
-                <div className={styles.frameChild10} />
-                <div className={styles.frameChild10} />
-                <div className={styles.frameChild10} />
-            </div>
-            <div className={styles.rectangleParent2}>
-                <div className={styles.frameChild10} />
-                <div className={styles.frameChild10} />
-                <div className={styles.frameChild10} />
-            </div>
-            <div className={styles.readMoreParent}>
-                <div className={styles.readMore}>Read More</div>
-                <div className={styles.readMore}>Read More</div>
-                <div className={styles.readMore}>Read More</div>
-            </div>
-            <div className={styles.readMoreGroup}>
-                <div className={styles.readMore}>Read More</div>
-                <div className={styles.readMore}>Read More</div>
-                <div className={styles.readMore}>Read More</div>
-            </div>
+            {projects.map((project) => (
+                <div className={styles.squareDivContainer} key={project.id}>
+                    <div className={styles.squareDiv}>
+                        <div className={styles.domainTitle}>
+                            <span>{project.projectDomain}</span>
+                        </div>
+                        <div
+                            className={styles.readMoreHalf}
+                            style={{ backgroundColor: '#121421' }}
+                        >
+                            <span className={styles.projectTitle}>{project.projectName}</span>
+                            <Link to={`/desc/${project.id}`} className={styles.readMoreButton}>
+                                Read More
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            ))}
+
             <img className={styles.maskGroupIcon1} alt="" src="/mask-group5@2x.png" />
 
-            <div className={styles.exploreMore}>{`Joined Projects `}</div>
-
-
+            <Typography variant="subtitle1" className={styles.exploreMore}>JOINED PROJECTS</Typography>
+            <div className={styles.squareDivContainer2}>
+                <div className={styles.squareDiv}>
+                    <div className={styles.domainTitle}>
+                        <span>projectDomain</span>
+                    </div>
+                    <div className={styles.readMoreHalf} style={{ backgroundColor: '#121421' }}>
+                        <span className={styles.projectTitle}>projectName</span>
+                        <Link to={`/`} className={styles.readMoreButton}>
+                            Read More
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </>
     );
 };

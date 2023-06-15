@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import styles from '../CSS/projectPage.module.css';
+import { Link } from 'react-router-dom';
 import picture from '../assets/project.jpg';
 import '../CSS/navbar.css';
 import Icon from '../assets/icon.png';
@@ -49,7 +50,9 @@ const Project = () => {
             </div>
             <div className={styles.readMoreHalf} style={{ backgroundColor: '#121421' }}>
               <span className={styles.projectTitle}>{project.projectName}</span>
-              <button className={styles.readMoreButton}>Read More</button>
+              <Link to={`/desc/${project.id}`} className={styles.readMoreButton}>
+                Read More
+              </Link>
             </div>
           </div>
         ))}

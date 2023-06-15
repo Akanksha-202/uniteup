@@ -12,6 +12,8 @@ import Profile from './Profile';
 import Addproject from './Addproject';
 import Projectdesc from './Projectdesc';
 import Navbar from '../components/Navbar';
+import Features from '../components/Features';
+import AboutUs from '../components/AboutUs';
 
 function Routess() {
     return (
@@ -23,6 +25,8 @@ function Routess() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/project" element={<Project />} />
+                    <Route path="/features" element={<Features />} />
+                    <Route path="/about" element={<AboutUs />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/add" element={<Addproject />} />
                     <Route path="/desc/:projectId" element={<Projectdesc />} /> 

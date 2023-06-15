@@ -20,24 +20,27 @@ const Navbar = () => {
             </div>
             <div className="flex">
               <Link to="/" className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">HOME</Link>
-              {isAuthenticated && (
+{isAuthenticated && (
                 <Link to="/project" className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">PROJECTS</Link>
               )}
-              <button className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">ABOUT US</button>
-              <button className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">FEATURES</button>
-              {isAuthenticated ? (
-                <>
-                  <Link to="/profile" className="text-gray-100 hover:bg-gray-800 hover:text-white px-6 py-2 rounded-md text-sm font-medium">PROFILE</Link>
-                  <button className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={handleLogout}>LOG OUT</button>
-                </>
-              ) : (
-                <Link to="/login" className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium">LOGIN</Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
+              <Link to="/about" className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">ABOUT US</Link>
+              <Link to="/features" className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-4">FEATURES</Link>
+
+  {
+    isAuthenticated ? (
+      <>
+        <Link to="/profile" className="text-gray-100 hover:bg-gray-800 hover:text-white px-6 py-2 rounded-md text-sm font-medium">PROFILE</Link>
+        <button className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={handleLogout}>LOG OUT</button>
+      </>
+    ) : (
+      <Link to="/login" className="text-gray-100 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium">LOGIN</Link>
+    )
+  }
+            </div >
+          </div >
+        </div >
+      </nav >
+    </div >
   );
 };
 

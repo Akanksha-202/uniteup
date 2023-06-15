@@ -10,7 +10,7 @@ const Hero = () => {
                         <div className="col-7">
                             <div className="content">
                                 <h1 className="title">UNITEUP</h1>
-                                <p className="description">Lorem ipsum dolor sit amet,<br /> consectetur adipiscing elit.<br /> Fusce lobortis auctor metus <br /> a rutrum.</p>
+                                <p className="description">Empowering Collaboration, Building Strong Teams,<br /> consectetur adipiscing elit.<br /> Fusce lobortis auctor metus <br /> a rutrum.</p>
                             </div>
                             <button type="button" class="btn btn-dark">CONTINUE</button>
                         </div>

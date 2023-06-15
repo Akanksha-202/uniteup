@@ -39,7 +39,7 @@ const Projectdesc = () => {
                 const joinedMembersData = [];
                 joinedMembersSnapshot.forEach((doc) => {
                     const userData = doc.data();
-                    joinedMembersData.push(userData.email);
+                    joinedMembersData.push(userData.link); // Push the "link" field instead of email
                 });
 
                 setJoinedMembers(joinedMembersData);
@@ -94,9 +94,11 @@ const Projectdesc = () => {
                     <Typography variant='h3' className={styles.joinedMember}>JOINED MEMBERS</Typography>
                     <div className={styles.NameWrapper}>
                         <div className={styles.NamesContainer}>
-                            {joinedMembers.map((email, index) => (
+                            {joinedMembers.map((link, index) => (
                                 <Typography key={index} variant="body1">
-                                    {email}
+                                    <a href={link} target="_blank" rel="noopener noreferrer">
+                                        {link}
+                                    </a>
                                 </Typography>
                             ))}
                         </div>
